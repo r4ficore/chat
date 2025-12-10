@@ -1,20 +1,14 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Statyczny widok chatbota Enigma
 
-# Run and deploy your AI Studio app
+Repozytorium zostało uproszczone do jednego statycznego widoku HTML/CSS/JS, aby można go było bezpośrednio wgrać na hosting (np. home.pl) bez procesu budowania Reacta czy TypeScriptu.
 
-This contains everything you need to run your app locally.
+## Uruchomienie
+1. Skopiuj pliki `index.html`, `style.css`, `script.js` oraz zasób `wzór.png` na serwer w jednym katalogu.
+2. Otwórz `index.html` w przeglądarce. Nie są wymagane żadne dodatkowe zależności ani konfiguracja.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1DabTG14iK6nbxe2bbkJgD-4rHtqu99Ar
+## Funkcjonalność
+- Interfejs został wystylizowany tak, aby odpowiadał makiecie z pliku `wzór.png`.
+- Wbudowana prosta logika czatu: wiadomości użytkownika trafiają na listę, a po chwili pojawia się losowa odpowiedź systemu, co pozwala przetestować układ bez integracji z API.
+- Przycisk „Wyczyść” zeruje historię w oknie konwersacji.
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Jeżeli chcesz zintegrować prawdziwe API, możesz rozbudować `script.js`, zachowując statyczny charakter frontendu.
