@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Enigma Interface",
+  "description": "A high-fidelity interface replication of the Gemini 3 concept with real streaming AI responses using the Google GenAI SDK.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
