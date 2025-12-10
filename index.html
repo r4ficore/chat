@@ -1,151 +1,332 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full antialiased">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enigma - Visual Strategy OS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Space Grotesk', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
-            },
-            colors: {
-              jet: '#0a0a0a',
-              graphite: '#2a2a2a',
-              'border-dark': '#222222',
-              gold: {
-                DEFAULT: '#d6b376',
-                dim: '#aa8c55',
-                dark: '#8a7040'
-              },
-              mist: '#94a3b8',
-            },
-            animation: {
-              'spin-slow': 'spin 30s linear infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'shine': 'shine 4s infinite linear',
-              'float': 'float 6s ease-in-out infinite',
-              'typing': 'typing 1s infinite ease-in-out',
-              'fade-in': 'fadeIn 0.4s ease-out forwards',
-              'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            },
-            keyframes: {
-              shine: {
-                '0%': { backgroundPosition: '200% center' },
-                '100%': { backgroundPosition: '-200% center' },
-              },
-              fadeIn: {
-                '0%': { opacity: '0', transform: 'translateY(10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              slideUp: {
-                '0%': { transform: 'translateY(20px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
-              },
-              typing: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-3px)' },
-              },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <!-- Inter, Space Grotesk, JetBrains Mono -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-      body {
-          font-family: 'Inter', sans-serif;
-          background-color: #0a0a0a;
-          color: #EDEDED;
-      }
-
-      /* Enigma Grid Lines Background */
-      .grid-bg {
-          background-color: #ffffff;
-          background-image:
-              linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-              linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
-          background-size: 40px 40px;
-      }
-
-      html.dark .grid-bg {
-          background-color: #0a0a0a;
-          background-image:
-              linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-      }
-
-      /* Custom Cursor */
-      .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #d6b376;
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9999;
-        pointer-events: none;
-        transition: opacity 0.3s;
-      }
-      .cursor-outline {
-        width: 40px;
-        height: 40px;
-        border: 1px solid rgba(214, 179, 118, 0.3);
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9998;
-        pointer-events: none;
-        transition: transform 0.15s ease-out, opacity 0.3s;
-      }
-
-      /* Text Gradient Class */
-      .text-gradient {
-        background: linear-gradient(to right, #d6b376, #fff8e7, #d6b376);
-        -webkit-background-clip: text;
-        color: transparent;
-        background-size: 200% auto;
-        animation: shine 6s linear infinite;
-      }
-
-      /* Hide scrollbar */
-      ::-webkit-scrollbar { display: none; }
-      html { -ms-overflow-style: none; scrollbar-width: none; }
-      
-      .input-container-transition { 
-        transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1); 
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enigma Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
 </head>
-  <body class="h-full grid-bg transition-colors duration-300">
-    <div id="root" class="h-full"></div>
-  <script type="module" src="/index.tsx"></script>
+<body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+  <div class="reference-controls">
+    <button id="reference-toggle" class="pill ghost">Przełącz podgląd wzoru</button>
+    <button id="grid-toggle" class="pill ghost">Siatka</button>
+    <button id="baseline-toggle" class="pill ghost">Baseline</button>
+    <label class="opacity-control">
+      <span>Skala wzoru</span>
+      <input id="reference-scale" type="range" min="80" max="140" value="100" />
+    </label>
+    <label class="opacity-control">
+      <span>Przezroczystość</span>
+      <input id="reference-opacity" type="range" min="0" max="100" value="45" />
+    </label>
+  </div>
+  <div id="reference-overlay" aria-hidden="true"></div>
+  <div id="baseline-overlay" aria-hidden="true"></div>
+
+  <div class="scene">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="grid" aria-hidden="true"></div>
+    <div class="spot spot-a" aria-hidden="true"></div>
+    <div class="spot spot-b" aria-hidden="true"></div>
+
+    <div class="layout">
+      <aside class="nav-rail">
+        <div class="brand-mark text-gradient">EN</div>
+        <div class="rail-stack">
+          <button class="rail-icon active">CORE</button>
+          <button class="rail-icon">CREATIVE</button>
+          <button class="rail-icon">MEDIA</button>
+          <button class="rail-icon">DATA</button>
+          <button class="rail-icon">OPS</button>
+        </div>
+        <div class="rail-stack subtle">
+          <div class="signal">
+            <span class="status-dot mini"></span>
+            <span>SYNC</span>
+          </div>
+          <div class="signal muted">MODE / PREVIEW</div>
+        </div>
+      </aside>
+
+      <div class="page">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow-line"><span class="eyebrow">ENIGMA OS</span><span class="dot"></span><span class="eyebrow muted">WYWIAD W TOKU...</span></p>
+          <h1 class="text-gradient">Nowa generacja interfejsu strategicznego</h1>
+          <p class="lede">Statyczny build HTML + CSS zrekonstruowany tak, by odwzorować układ ze wzoru: karty, panele boczne, bogaty nagłówek i złote akcenty. Wszystko bez bundlera, gotowe do wrzucenia na hosting.</p>
+          <div class="tags">
+            <span class="pill ghost">CORE</span>
+            <span class="pill ghost">CREATIVE</span>
+            <span class="pill ghost">VISION</span>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <div class="pill live">LIVE</div>
+          <div class="meta-stack">
+            <div>
+              <p class="label">lokalizacja</p>
+              <p class="value">ZAKOPANE, POLSKA</p>
+            </div>
+            <div>
+              <p class="label">godzina</p>
+              <p class="value">12:03 PM</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="column side-left">
+          <div class="panel glass compact">
+            <div class="panel-header">
+              <p class="label">STRUKTURA</p>
+              <span class="crumbs">BRIEF / KONTEKST</span>
+            </div>
+            <div class="stacked-list">
+              <div class="stacked-item">
+                <div>
+                  <p class="value">Discovery</p>
+                  <p class="muted">Analiza referencji + moodboard</p>
+                </div>
+                <span class="pill tiny">LIVE</span>
+              </div>
+              <div class="stacked-item">
+                <div>
+                  <p class="value">Story thread</p>
+                  <p class="muted">Narracja / światło / AI assets</p>
+                </div>
+                <span class="dot small"></span>
+              </div>
+              <div class="stacked-item">
+                <div>
+                  <p class="value">Tech overlay</p>
+                  <p class="muted">Audio, wideo, sensoryka</p>
+                </div>
+                <span class="dot small gold"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel gradient compact">
+            <div class="panel-header">
+              <p class="label">TIMELINE</p>
+              <span class="crumbs">STATUS</span>
+            </div>
+            <ul class="timeline">
+              <li><span>Kickoff + brief</span><span class="pill ghost tiny">Done</span></li>
+              <li><span>Storyboard + refs</span><span class="pill ghost tiny">In progress</span></li>
+              <li><span>Audio / wideo pack</span><span class="pill ghost tiny">Next</span></li>
+              <li><span>Deploy / prezentacja</span><span class="pill ghost tiny">Plan</span></li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="column main">
+          <div class="panel glass">
+            <div class="panel-header">
+              <div class="status">
+                <span class="status-dot"></span>
+                <div>
+                  <p class="label">Tryb aktywny</p>
+                  <p class="value">CORE / CREATIVE CHAT</p>
+                </div>
+              </div>
+              <div class="crumbs">WIADOMOŚCI / LIVE TRANSKRYPT</div>
+            </div>
+            <div class="chat-window" id="chat-window">
+              <div class="message bot">
+                <div class="avatar">E</div>
+                <div class="bubble">
+                  <div class="meta"><span>ENIGMA</span><span>12:02</span></div>
+                  <p class="body">Hej! Jestem Twoim kreatywnym asystentem. Opisz swój pomysł, a pomogę go rozwinąć.</p>
+                </div>
+              </div>
+              <div class="message user">
+                <div class="avatar">TY</div>
+                <div class="bubble">
+                  <div class="meta"><span>Użytkownik</span><span>12:03</span></div>
+                  <p class="body">Potrzebuję konceptu wydarzenia promującego nową kolekcję.</p>
+                </div>
+              </div>
+            </div>
+            <form class="composer" id="chat-form">
+              <div class="field">
+                <label class="label" for="chat-input">WIADOMOŚĆ</label>
+                <textarea id="chat-input" name="message" rows="2" placeholder="Napisz wiadomość..." required></textarea>
+              </div>
+              <div class="composer-actions">
+                <button type="button" class="pill ghost" id="clear-btn">Wyczyść</button>
+                <div class="ghost-icons">
+                  <span title="Załącz plik">📎</span>
+                  <span title="Nagraj audio">🎙️</span>
+                  <span title="Otwórz narzędzia">⚙️</span>
+                </div>
+                <button type="submit" class="pill primary">Wyślij</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel glass compact duo">
+            <div>
+              <p class="label">Notatki produkcyjne</p>
+              <p class="note">Zapisz referencje, timingi i kluczowe sceny, aby porównać spacing z podglądem wzoru.</p>
+            </div>
+            <div class="note-box">
+              <p class="muted">„UI musi odwzorować złote akcenty, cienkie linie siatki i karty z podwójną głębią. Pamiętaj o baseline dla tekstów.”</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="column side">
+          <div class="panel gradient">
+            <p class="label">Status misji</p>
+            <h2>44 MIĘDZYNARODOWY KONKURS WIDOKÓWKI</h2>
+            <ul class="meta-list">
+              <li><span class="muted">Zakopane, Polska</span><span>12:03 PM</span></li>
+              <li><span class="muted">Kwota</span><span>26K EUR</span></li>
+              <li><span class="muted">Kolekcja</span><span>WIOSNA 2025</span></li>
+            </ul>
+            <p class="note">Enigma wyciąga dane z briefu, tworzy storyboardy, scenariusze i moodboard na żywo.</p>
+          </div>
+
+          <div class="panel glass compact">
+            <div class="panel-header">
+              <p class="label">Tools overlay</p>
+              <span class="crumbs">AUDIO / WIDEO / TECH</span>
+            </div>
+            <div class="tool-grid">
+              <div class="tool-card"><span class="emoji">🎥</span><div><p class="value">Audio + Wideo</p><p class="muted">7 elementów</p></div></div>
+              <div class="tool-card"><span class="emoji">🧠</span><div><p class="value">Vision + Story</p><p class="muted">5 wariantów</p></div></div>
+              <div class="tool-card"><span class="emoji">📁</span><div><p class="value">Załączniki</p><p class="muted">3 pliki</p></div></div>
+            </div>
+          </div>
+
+          <div class="panel glass compact">
+            <div class="panel-header">
+              <p class="label">Załączniki</p>
+              <span class="crumbs">PODGLĄD</span>
+            </div>
+            <div class="attachments">
+              <div class="thumb"><span>Uśmiech</span></div>
+              <div class="thumb highlighted"><span>Kontur</span></div>
+              <div class="thumb"><span>Sketch</span></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="system-board">
+        <div class="panel glass metric-card">
+          <div class="panel-header">
+            <p class="label">Aktywne moduły</p>
+            <span class="crumbs">LIVE / OPS</span>
+          </div>
+          <div class="metric-row">
+            <div>
+              <p class="value">8</p>
+              <p class="muted">modułów aktywnych</p>
+            </div>
+            <div>
+              <p class="value">12</p>
+              <p class="muted">zasobów oczekujących</p>
+            </div>
+            <div>
+              <p class="value text-gradient">3</p>
+              <p class="muted">tryby premium</p>
+            </div>
+          </div>
+          <div class="progress-line">
+            <span class="bar" style="width: 72%"></span>
+          </div>
+        </div>
+
+        <div class="panel gradient metric-card wide">
+          <div class="panel-header">
+            <p class="label">Mapa przepływu</p>
+            <span class="crumbs">ROUTES</span>
+          </div>
+          <div class="flow-grid">
+            <div class="flow-node active">Input</div>
+            <div class="flow-node">Parse</div>
+            <div class="flow-node">Reason</div>
+            <div class="flow-node">Synthesize</div>
+            <div class="flow-node">Output</div>
+          </div>
+          <p class="note">Ustaw elementy, by linie i przerwy pokryły się ze wzorem — to szybka metoda pixel-perfect bez dodatkowych narzędzi.</p>
+        </div>
+
+        <div class="panel glass metric-card">
+          <div class="panel-header">
+            <p class="label">Notatki pixel-perfect</p>
+            <span class="crumbs">GRID / BASELINE</span>
+          </div>
+          <ul class="todo-list">
+            <li><span>Siatka: krok 40px, mask radial</span><span class="pill ghost tiny">włącz</span></li>
+            <li><span>Baseline: 8px</span><span class="pill ghost tiny">aktywny</span></li>
+            <li><span>Overlay: przezroczystość 45%, skala 100%</span><span class="pill ghost tiny">ok</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="threads">
+        <div class="panel glass compact thread-card">
+          <p class="label">Wątki</p>
+          <div class="thread-list">
+            <div class="thread-item">
+              <div>
+                <p class="value">Moodboard</p>
+                <p class="muted">tekstury / światło / gradient</p>
+              </div>
+              <span class="pill ghost tiny">LIVE</span>
+            </div>
+            <div class="thread-item">
+              <div>
+                <p class="value">Narrative</p>
+                <p class="muted">timeline scen + lektor</p>
+              </div>
+              <span class="pill ghost tiny">SYNC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel glass compact thread-card">
+          <p class="label">Dane referencyjne</p>
+          <div class="mini-grid">
+            <div class="mini-tile">
+              <p class="value">1.3</p>
+              <p class="muted">ratio wzoru</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">820px</p>
+              <p class="muted">max szerokość kolumny</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">40px</p>
+              <p class="muted">krok siatki</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">8px</p>
+              <p class="muted">baseline</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot-rail">
+        <button class="rail-btn">Nowy chat</button>
+        <button class="rail-btn">Historia</button>
+        <button class="rail-btn">Eksport</button>
+      </footer>
+    </div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
 </body>
 </html>
