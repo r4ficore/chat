@@ -6,64 +6,77 @@
   <title>Enigma Chat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <div class="page-shell">
-    <div class="background-grid" aria-hidden="true"></div>
+  <div class="scene">
+    <div class="grid" aria-hidden="true"></div>
+    <div class="spot spot-a" aria-hidden="true"></div>
+    <div class="spot spot-b" aria-hidden="true"></div>
 
-    <header class="hero">
-      <div>
-        <p class="eyebrow">ENIGMA OS</p>
-        <h1>Nowy asystent strategiczny</h1>
-        <p class="lede">Interfejs został uproszczony do czystego HTML, dzięki czemu uruchamia się poprawnie na statycznym hostingu.</p>
-      </div>
-      <div class="badge">LIVE</div>
-    </header>
-
-    <main class="chat-card">
-      <div class="chat-header">
-        <div class="title-group">
-          <div class="glow-dot"></div>
+    <div class="page">
+      <header class="hero">
+        <div class="eyebrow-line">
+          <span class="eyebrow">ENIGMA OS</span>
+          <span class="dot"></span>
+          <span class="eyebrow muted">WYWIAD W TOKU...</span>
+        </div>
+        <div class="hero-top">
           <div>
-            <p class="small">Tryb</p>
-            <h2>CORE / CREATIVE CHAT</h2>
+            <p class="overline">ENIGMA OS</p>
+            <h1>Nowy asystent strategiczny</h1>
+            <p class="lede">Interfejs został uproszczony do czystego HTML, dzięki czemu uruchamia się poprawnie na statycznym hostingu.</p>
+          </div>
+          <div class="pill live">LIVE</div>
+        </div>
+      </header>
+
+      <main class="chat">
+        <div class="chat-header">
+          <div class="mode">
+            <div class="status-dot"></div>
+            <div>
+              <p class="label">TRYB</p>
+              <p class="mode-name">CORE / CREATIVE CHAT</p>
+            </div>
+          </div>
+          <button class="pill ghost">Szybka odpowiedź</button>
+        </div>
+
+        <div class="chat-window" id="chat-window">
+          <div class="message bot">
+            <div class="avatar">E</div>
+            <div class="bubble">
+              <p class="sender">ENIGMA</p>
+              <p class="body">Hej! Jestem Twoim kreatywnym asystentem. Opisz swój pomysł, a pomogę go rozwinąć.</p>
+            </div>
+          </div>
+          <div class="message user">
+            <div class="avatar">TY</div>
+            <div class="bubble">
+              <p class="sender">Użytkownik</p>
+              <p class="body">Potrzebuję konceptu wydarzenia promującego nową kolekcję.</p>
+            </div>
           </div>
         </div>
-        <div class="pill">Szybka odpowiedź</div>
-      </div>
 
-      <div class="chat-window" id="chat-window">
-        <div class="message bot">
-          <div class="avatar">E</div>
-          <div class="bubble">
-            <p class="sender">ENIGMA</p>
-            <p>Hej! Jestem Twoim kreatywnym asystentem. Opisz swój pomysł, a pomogę go rozwinąć.</p>
+        <form class="composer" id="chat-form">
+          <label class="visually-hidden" for="chat-input">Wiadomość</label>
+          <textarea id="chat-input" name="message" rows="2" placeholder="Napisz wiadomość..." required></textarea>
+          <div class="composer-actions">
+            <button type="button" class="pill ghost" id="clear-btn">Wyczyść</button>
+            <button type="submit" class="pill primary">Wyślij</button>
           </div>
-        </div>
-        <div class="message user">
-          <div class="avatar">TY</div>
-          <div class="bubble">
-            <p class="sender">Użytkownik</p>
-            <p>Potrzebuję konceptu wydarzenia promującego nową kolekcję.</p>
-          </div>
-        </div>
-      </div>
+        </form>
+      </main>
 
-      <form class="composer" id="chat-form">
-        <label class="visually-hidden" for="chat-input">Wiadomość</label>
-        <textarea id="chat-input" name="message" rows="2" placeholder="Napisz wiadomość..." required></textarea>
-        <div class="composer-actions">
-          <button type="button" class="ghost" id="clear-btn">Wyczyść</button>
-          <button type="submit" class="primary">Wyślij</button>
-        </div>
-      </form>
-    </main>
-
-    <footer class="footnote">Widok został przebudowany, aby odpowiadał makiecie z pliku „wzór.png” i działał bez środowiska React/TypeScript.</footer>
+      <footer class="foot-rail">
+        <button class="rail-btn">Nowy chat</button>
+        <button class="rail-btn">Historia</button>
+      </footer>
+    </div>
   </div>
-
   <script src="./script.js"></script>
 </body>
 </html>
