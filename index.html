@@ -16,12 +16,19 @@
   <div class="cursor-outline"></div>
   <div class="reference-controls">
     <button id="reference-toggle" class="pill ghost">Przełącz podgląd wzoru</button>
+    <button id="grid-toggle" class="pill ghost">Siatka</button>
+    <button id="baseline-toggle" class="pill ghost">Baseline</button>
+    <label class="opacity-control">
+      <span>Skala wzoru</span>
+      <input id="reference-scale" type="range" min="80" max="140" value="100" />
+    </label>
     <label class="opacity-control">
       <span>Przezroczystość</span>
       <input id="reference-opacity" type="range" min="0" max="100" value="45" />
     </label>
   </div>
   <div id="reference-overlay" aria-hidden="true"></div>
+  <div id="baseline-overlay" aria-hidden="true"></div>
 
   <div class="scene">
     <div class="grain" aria-hidden="true"></div>
@@ -29,7 +36,26 @@
     <div class="spot spot-a" aria-hidden="true"></div>
     <div class="spot spot-b" aria-hidden="true"></div>
 
-    <div class="page">
+    <div class="layout">
+      <aside class="nav-rail">
+        <div class="brand-mark text-gradient">EN</div>
+        <div class="rail-stack">
+          <button class="rail-icon active">CORE</button>
+          <button class="rail-icon">CREATIVE</button>
+          <button class="rail-icon">MEDIA</button>
+          <button class="rail-icon">DATA</button>
+          <button class="rail-icon">OPS</button>
+        </div>
+        <div class="rail-stack subtle">
+          <div class="signal">
+            <span class="status-dot mini"></span>
+            <span>SYNC</span>
+          </div>
+          <div class="signal muted">MODE / PREVIEW</div>
+        </div>
+      </aside>
+
+      <div class="page">
       <header class="masthead">
         <div>
           <p class="eyebrow-line"><span class="eyebrow">ENIGMA OS</span><span class="dot"></span><span class="eyebrow muted">WYWIAD W TOKU...</span></p>
@@ -196,11 +222,109 @@
         </aside>
       </section>
 
+      <section class="system-board">
+        <div class="panel glass metric-card">
+          <div class="panel-header">
+            <p class="label">Aktywne moduły</p>
+            <span class="crumbs">LIVE / OPS</span>
+          </div>
+          <div class="metric-row">
+            <div>
+              <p class="value">8</p>
+              <p class="muted">modułów aktywnych</p>
+            </div>
+            <div>
+              <p class="value">12</p>
+              <p class="muted">zasobów oczekujących</p>
+            </div>
+            <div>
+              <p class="value text-gradient">3</p>
+              <p class="muted">tryby premium</p>
+            </div>
+          </div>
+          <div class="progress-line">
+            <span class="bar" style="width: 72%"></span>
+          </div>
+        </div>
+
+        <div class="panel gradient metric-card wide">
+          <div class="panel-header">
+            <p class="label">Mapa przepływu</p>
+            <span class="crumbs">ROUTES</span>
+          </div>
+          <div class="flow-grid">
+            <div class="flow-node active">Input</div>
+            <div class="flow-node">Parse</div>
+            <div class="flow-node">Reason</div>
+            <div class="flow-node">Synthesize</div>
+            <div class="flow-node">Output</div>
+          </div>
+          <p class="note">Ustaw elementy, by linie i przerwy pokryły się ze wzorem — to szybka metoda pixel-perfect bez dodatkowych narzędzi.</p>
+        </div>
+
+        <div class="panel glass metric-card">
+          <div class="panel-header">
+            <p class="label">Notatki pixel-perfect</p>
+            <span class="crumbs">GRID / BASELINE</span>
+          </div>
+          <ul class="todo-list">
+            <li><span>Siatka: krok 40px, mask radial</span><span class="pill ghost tiny">włącz</span></li>
+            <li><span>Baseline: 8px</span><span class="pill ghost tiny">aktywny</span></li>
+            <li><span>Overlay: przezroczystość 45%, skala 100%</span><span class="pill ghost tiny">ok</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="threads">
+        <div class="panel glass compact thread-card">
+          <p class="label">Wątki</p>
+          <div class="thread-list">
+            <div class="thread-item">
+              <div>
+                <p class="value">Moodboard</p>
+                <p class="muted">tekstury / światło / gradient</p>
+              </div>
+              <span class="pill ghost tiny">LIVE</span>
+            </div>
+            <div class="thread-item">
+              <div>
+                <p class="value">Narrative</p>
+                <p class="muted">timeline scen + lektor</p>
+              </div>
+              <span class="pill ghost tiny">SYNC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel glass compact thread-card">
+          <p class="label">Dane referencyjne</p>
+          <div class="mini-grid">
+            <div class="mini-tile">
+              <p class="value">1.3</p>
+              <p class="muted">ratio wzoru</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">820px</p>
+              <p class="muted">max szerokość kolumny</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">40px</p>
+              <p class="muted">krok siatki</p>
+            </div>
+            <div class="mini-tile">
+              <p class="value">8px</p>
+              <p class="muted">baseline</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer class="foot-rail">
         <button class="rail-btn">Nowy chat</button>
         <button class="rail-btn">Historia</button>
         <button class="rail-btn">Eksport</button>
       </footer>
+    </div>
     </div>
   </div>
   <script src="./script.js"></script>

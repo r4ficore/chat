@@ -10,7 +10,9 @@ Repozytorium zostało uproszczone do jednego statycznego widoku HTML/CSS/JS, aby
 - Interfejs został przebudowany tak, aby bliżej odwzorować makietę z pliku `wzór.png` – z kartą czatu, bocznym panelem statusu i złotymi akcentami.
 - Wbudowana prosta logika czatu: wiadomości użytkownika trafiają na listę, a po chwili pojawia się losowa odpowiedź systemu, co pozwala przetestować układ bez integracji z API.
 - Przycisk „Wyczyść” zeruje historię w oknie konwersacji.
-- Dodano przełączany podgląd makiety: przycisk „Przełącz podgląd wzoru” nakłada półprzezroczysty obraz referencyjny na stronę, a suwak zmienia jego przezroczystość, co ułatwia pixel-perfect poprawki bez zewnętrznych narzędzi. Gdy podgląd jest aktywny, strzałki przesuwają warstwę (Shift = większy krok), a klawisz „R” resetuje pozycję.
+- Dodano przełączany podgląd makiety: przycisk „Przełącz podgląd wzoru” nakłada półprzezroczysty obraz referencyjny na stronę, suwak zmienia przezroczystość, a drugi suwak pozwala skalować grafikę, by wyrównać proporcje. Gdy podgląd jest aktywny, strzałki przesuwają warstwę (Shift = większy krok), a klawisz „R” resetuje pozycję.
+- Nowe narzędzia referencyjne: przyciski „Siatka” i „Baseline” umożliwiają włączanie/wyłączanie linii siatki i linii bazowych tekstu bezpośrednio w widoku, co pomaga dopasować spacing do wzoru.
+- Layout wzbogacono o szynę nawigacyjną, sekcję „system-board” i karty wątków, aby zwiększyć zbieżność z wielowarstwowym interfejsem z pliku `wzór.png`.
 
 Jeżeli chcesz zintegrować prawdziwe API, możesz rozbudować `script.js`, zachowując statyczny charakter frontendu.
 

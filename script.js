@@ -5,6 +5,11 @@ const clearBtn = document.getElementById('clear-btn');
 const overlay = document.getElementById('reference-overlay');
 const toggleOverlay = document.getElementById('reference-toggle');
 const opacityControl = document.getElementById('reference-opacity');
+const scaleControl = document.getElementById('reference-scale');
+const grid = document.querySelector('.grid');
+const gridToggle = document.getElementById('grid-toggle');
+const baseline = document.getElementById('baseline-overlay');
+const baselineToggle = document.getElementById('baseline-toggle');
 let overlayOffset = { x: 0, y: 0 };
 
 const addMessage = (text, role = 'user') => {
@@ -71,6 +76,14 @@ if (toggleOverlay && overlay && opacityControl) {
     overlay.style.opacity = overlay.classList.contains('visible') ? value : 0;
   });
 
+  if (scaleControl) {
+    overlay.style.setProperty('--overlay-scale', Number(scaleControl.value) / 100);
+    scaleControl.addEventListener('input', (e) => {
+      const value = Number(e.target.value) / 100;
+      overlay.style.setProperty('--overlay-scale', value);
+    });
+  }
+
   const moveOverlay = (dx, dy) => {
     overlayOffset = { x: overlayOffset.x + dx, y: overlayOffset.y + dy };
     overlay.style.transform = `translate(${overlayOffset.x}px, ${overlayOffset.y}px)`;
@@ -104,6 +117,18 @@ if (toggleOverlay && overlay && opacityControl) {
       default:
         break;
     }
+  });
+}
+
+if (grid && gridToggle) {
+  gridToggle.addEventListener('click', () => {
+    grid.classList.toggle('hidden');
+  });
+}
+
+if (baseline && baselineToggle) {
+  baselineToggle.addEventListener('click', () => {
+    baseline.classList.toggle('visible');
   });
 }
 
